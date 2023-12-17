@@ -23,14 +23,14 @@ script = """
 	# this now lives in .flox instead of the main project root
 
         if [ ! -d venv ]; then
-                echo -n "creating venv in .flox/flox-venv..."
+                echo -n "🌏 creatin venv in .flox/flox-venv..."
                 python -m venv .flox/flox-venv
-		echo "🌏"
+		echo "boom!"
         fi
 
-        echo -n "activating .flox/flox-venv..."
+        echo -n "⚡️ activatin .flox/flox-venv..."
         . .flox/flox-venv/bin/activate
-	echo "⚡️"
+	echo "zing!"
 
 
 	# ---
@@ -39,15 +39,15 @@ script = """
 	QUIET="-qq"
 
 	if [[ $(uname -m) == 'arm64' ]]; then
-        	echo -n "pippin' pytorch nightly..."
+        	echo -n "🔦 pippin pytorch nightly..."
         	pip3 $QUIET install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu
-		echo "🔦"
+		echo "pow!"
 	fi
 
         if [ -f requirements.txt ]; then
-        	echo -n "pippin' requirements.txt..."
+        	echo -n "🐍 pippin requirements.txt..."
         	pip3 $QUIET install -r requirements.txt
-		echo "🐍"
+		echo "biff!"
 	fi
 
 
