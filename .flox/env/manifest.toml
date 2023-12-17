@@ -6,6 +6,7 @@ python3.path = "python3"
 python310.path = "python310"
 pip.path = "python310Packages.pip"
 coreutils = {} # to get around realpath bug for now
+gcc = {}
 
 # Set your activation hook ( run when entering the environment )
 # You can write this inline with the `script` field, or provide a
