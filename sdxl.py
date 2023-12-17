@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import sys
 import torch
 from imgcat import imgcat
 from diffusers import AutoPipelineForText2Image
@@ -20,7 +21,11 @@ else:
 print("\nPipeline configured for " + device + " 🔥")
 
 # configure the prompt
-prompt = "a fun old circus"
+if len(sys.argv) > 1:
+	prompt = sys.argv[1]
+else:
+	prompt = "a flox in a henhouse"
+
 steps = 1
 
 # run the pipeline
