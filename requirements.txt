@@ -1,0 +1,9 @@
+ipykernel
+diffusers
+compel
+accelerate
+googletrans
+numba
+jupyter
+imgcat
+

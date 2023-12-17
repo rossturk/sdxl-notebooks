@@ -1,0 +1,60 @@
+# List packages you wish to install in your environment under
+# the `[install]` table
+
+[install]
+python3.path = "python3"
+python310.path = "python310"
+pip.path = "python310Packages.pip"
+coreutils = {} # to get around realpath bug for now
+
+# Set your activation hook ( run when entering the environment )
+# You can write this inline with the `script` field, or provide a
+# relative path to a file using the `file` field.
+
+[hook]
+script = """
+
+	echo ""
+
+	# ---
+	# get ourselves a working python - right now, that
+	# means a virtual environment
+	#
+	# this now lives in .flox instead of the main project root
+
+        if [ ! -d venv ]; then
+                echo -n "creating venv in .flox/flox-venv..."
+                python -m venv .flox/flox-venv
+		echo "🌏"
+        fi
+
+        echo -n "activating .flox/flox-venv..."
+        . .flox/flox-venv/bin/activate
+	echo "⚡️"
+
+
+	# ---
+	# install python deps into the virtual environment
+
+	QUIET="-qq"
+
+	if [[ $(uname -m) == 'arm64' ]]; then
+        	echo -n "pippin' pytorch nightly..."
+        	pip3 $QUIET install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu
+		echo "🔦"
+	fi
+
+        if [ -f requirements.txt ]; then
+        	echo -n "pippin' requirements.txt..."
+        	pip3 $QUIET install -r requirements.txt
+		echo "🐍"
+	fi
+
+
+	# ---
+	# set tha alias for our service and educate the user
+
+	alias start="jupyter notebook sdxl.ipynb"
+	echo; echo "🎉 all done! run 'start' to open the notebook or 'ls' if notebooks scare you"
+"""
+
