@@ -4,6 +4,9 @@ import sys
 import torch
 from imgcat import imgcat
 from diffusers import AutoPipelineForText2Image
+from diffusers import logging
+
+logging.set_verbosity_error()
 
 # Let's figure out what kind of hardware torch has been built for!
 if torch.cuda.is_available():

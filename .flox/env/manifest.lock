@@ -2,20 +2,21 @@
   "lockfile-version": 0,
   "manifest": {
     "hook": {
-      "script": "\n\techo \"\"\n\n\t# ---\n\t# get ourselves a working python - right now, that\n\t# means a virtual environment\n\t#\n\t# this now lives in .flox instead of the main project root\n\n        if [ ! -d venv ]; then\n                echo -n \"🌏 creatin venv in .flox/flox-venv...\"\n                python -m venv .flox/flox-venv\n\t\techo \"boom!\"\n        fi\n\n        echo -n \"⚡️ activatin .flox/flox-venv...\"\n        . .flox/flox-venv/bin/activate\n\techo \"zing!\"\n\n\n\t# ---\n\t# install python deps into the virtual environment\n\n\tQUIET=\"-qq\"\n\n\tif [[ $(uname -m) == 'arm64' ]]; then\n        \techo -n \"🔦 pippin pytorch nightly...\"\n        \tpip3 $QUIET install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu\n\t\techo \"pow!\"\n\tfi\n\n        if [ -f requirements.txt ]; then\n        \techo -n \"🐍 pippin requirements.txt...\"\n        \tpip3 $QUIET install -r requirements.txt\n\t\techo \"zomg!\"\n\tfi\n\n\n\t# ---\n\t# set tha alias for our service and educate the user\n\n\talias start=\"jupyter notebook sdxl.ipynb\"\n\techo; echo \"🎉 all done! run 'start' to open the notebook or 'ls' if notebooks scare you\"\n"
+      "script": "\n\techo \"\"\n\n\t# ---\n\t# get ourselves a working python - right now, that\n\t# means a virtual environment\n\t#\n\t# this now lives in .flox instead of the main project root\n\n        if [ ! -d ~/.cache/sdxl-env/venv ]; then\n                echo -n \"🌏 creatin venv in ~/.cache/sdxl-env/venv...\"\n                python -m venv ~/.cache/sdxl-env/venv\n\t\techo \"boom!\"\n        fi\n\n        echo -n \"⚡️ activatin .flox/flox-venv...\"\n        . ~/.cache/sdxl-env/venv/bin/activate\n\techo \"zing!\"\n\n\n\t# ---\n\t# install python deps into the virtual environment\n\n\tQUIET=\"-qq\"\n\n\tif [[ $(uname -m) == 'arm64' ]]; then\n        \techo -n \"🔦 pippin pytorch nightly...\"\n        \tpip3 $QUIET install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu\n\t\techo \"pow!\"\n\tfi\n\n        if [ -f requirements.txt ]; then\n        \techo -n \"🐍 pippin requirements.txt...\"\n        \tpip3 $QUIET install -r requirements.txt\n\t\techo \"zomg!\"\n\tfi\n\n\n\t# ---\n\t# set tha alias for our service and educate the user\n\n\talias start=\"jupyter notebook sdxl.ipynb\"\n\techo; echo \"🎉 all done! run 'start' to open the notebook or 'ls' if notebooks scare you\"\n"
     },
     "install": {
-      "coreutils": null,
       "gcc-unwrapped": null,
       "pip": {
         "path": "python310Packages.pip"
       },
-      "python3": {
-        "path": "python3"
-      },
       "python310": {
         "path": "python310"
       }
+    },
+    "options": {
+      "systems": [
+        "aarch64-darwin"
+      ]
     },
     "registry": {
       "defaults": {
@@ -25,7 +26,7 @@
         "nixpkgs": {
           "from": {
             "owner": "NixOS",
-            "ref": "release-23.05",
+            "ref": "release-23.11",
             "repo": "nixpkgs",
             "type": "github"
           },
@@ -40,124 +41,73 @@
     }
   },
   "packages": {
-    "x86_64-linux": {
-      "coreutils": {
-        "attr-path": [
-          "legacyPackages",
-          "x86_64-linux",
-          "coreutils"
-        ],
-        "info": {
-          "broken": false,
-          "license": "GPL-3.0-or-later",
-          "pname": "coreutils",
-          "unfree": false,
-          "version": "9.1"
-        },
-        "input": {
-          "attrs": {
-            "lastModified": 1702761668,
-            "narHash": "sha256-pjaa+C9fUvUBh2ebGha6zQdb6mpBBFCJW4WwYfId9+k=",
-            "owner": "NixOS",
-            "repo": "nixpkgs",
-            "rev": "94f88613cb335c6d52d4c87b4ee3275ead7092b5",
-            "type": "github"
-          },
-          "fingerprint": "2686a2e82f4a788b780c63292f2058cae88d9ac6fa95f404ba87c3f44bcbb713",
-          "url": "github:NixOS/nixpkgs/94f88613cb335c6d52d4c87b4ee3275ead7092b5"
-        },
-        "priority": 5
-      },
+    "aarch64-darwin": {
       "gcc-unwrapped": {
         "attr-path": [
           "legacyPackages",
-          "x86_64-linux",
+          "aarch64-darwin",
           "gcc-unwrapped"
         ],
         "info": {
           "broken": false,
+          "description": "GNU Compiler Collection, version 12.3.0",
           "license": "GPL-3.0-or-later",
           "pname": "gcc",
           "unfree": false,
-          "version": "12.2.0"
+          "version": "12.3.0"
         },
         "input": {
           "attrs": {
-            "lastModified": 1702761668,
-            "narHash": "sha256-pjaa+C9fUvUBh2ebGha6zQdb6mpBBFCJW4WwYfId9+k=",
+            "lastModified": 1707786466,
+            "narHash": "sha256-yLPfrmW87M2qt+8bAmwopJawa+MJLh3M9rUbXtpUc1o=",
             "owner": "NixOS",
             "repo": "nixpkgs",
-            "rev": "94f88613cb335c6d52d4c87b4ee3275ead7092b5",
+            "rev": "01885a071465e223f8f68971f864b15829988504",
             "type": "github"
           },
-          "fingerprint": "2686a2e82f4a788b780c63292f2058cae88d9ac6fa95f404ba87c3f44bcbb713",
-          "url": "github:NixOS/nixpkgs/94f88613cb335c6d52d4c87b4ee3275ead7092b5"
+          "fingerprint": "4a5ebeec1b11fae36f82c80ac07d4133d1ff259135a711c02938d1822c859863",
+          "url": "github:NixOS/nixpkgs/01885a071465e223f8f68971f864b15829988504"
         },
         "priority": 5
       },
       "pip": {
         "attr-path": [
           "legacyPackages",
-          "x86_64-linux",
+          "aarch64-darwin",
           "python310Packages",
           "pip"
         ],
         "info": {
           "broken": false,
+          "description": "The PyPA recommended tool for installing Python packages",
           "license": null,
           "pname": "pip",
           "unfree": false,
-          "version": "23.0.1"
+          "version": "23.2.1"
         },
         "input": {
           "attrs": {
-            "lastModified": 1702761668,
-            "narHash": "sha256-pjaa+C9fUvUBh2ebGha6zQdb6mpBBFCJW4WwYfId9+k=",
+            "lastModified": 1707786466,
+            "narHash": "sha256-yLPfrmW87M2qt+8bAmwopJawa+MJLh3M9rUbXtpUc1o=",
             "owner": "NixOS",
             "repo": "nixpkgs",
-            "rev": "94f88613cb335c6d52d4c87b4ee3275ead7092b5",
+            "rev": "01885a071465e223f8f68971f864b15829988504",
             "type": "github"
           },
-          "fingerprint": "2686a2e82f4a788b780c63292f2058cae88d9ac6fa95f404ba87c3f44bcbb713",
-          "url": "github:NixOS/nixpkgs/94f88613cb335c6d52d4c87b4ee3275ead7092b5"
-        },
-        "priority": 5
-      },
-      "python3": {
-        "attr-path": [
-          "legacyPackages",
-          "x86_64-linux",
-          "python3"
-        ],
-        "info": {
-          "broken": false,
-          "license": "Python-2.0",
-          "pname": "python3",
-          "unfree": false,
-          "version": "3.10.13"
-        },
-        "input": {
-          "attrs": {
-            "lastModified": 1702761668,
-            "narHash": "sha256-pjaa+C9fUvUBh2ebGha6zQdb6mpBBFCJW4WwYfId9+k=",
-            "owner": "NixOS",
-            "repo": "nixpkgs",
-            "rev": "94f88613cb335c6d52d4c87b4ee3275ead7092b5",
-            "type": "github"
-          },
-          "fingerprint": "2686a2e82f4a788b780c63292f2058cae88d9ac6fa95f404ba87c3f44bcbb713",
-          "url": "github:NixOS/nixpkgs/94f88613cb335c6d52d4c87b4ee3275ead7092b5"
+          "fingerprint": "4a5ebeec1b11fae36f82c80ac07d4133d1ff259135a711c02938d1822c859863",
+          "url": "github:NixOS/nixpkgs/01885a071465e223f8f68971f864b15829988504"
         },
         "priority": 5
       },
       "python310": {
         "attr-path": [
           "legacyPackages",
-          "x86_64-linux",
+          "aarch64-darwin",
           "python310"
         ],
         "info": {
           "broken": false,
+          "description": "A high-level dynamically-typed programming language",
           "license": "Python-2.0",
           "pname": "python3",
           "unfree": false,
@@ -165,15 +115,15 @@
         },
         "input": {
           "attrs": {
-            "lastModified": 1702761668,
-            "narHash": "sha256-pjaa+C9fUvUBh2ebGha6zQdb6mpBBFCJW4WwYfId9+k=",
+            "lastModified": 1707786466,
+            "narHash": "sha256-yLPfrmW87M2qt+8bAmwopJawa+MJLh3M9rUbXtpUc1o=",
             "owner": "NixOS",
             "repo": "nixpkgs",
-            "rev": "94f88613cb335c6d52d4c87b4ee3275ead7092b5",
+            "rev": "01885a071465e223f8f68971f864b15829988504",
             "type": "github"
           },
-          "fingerprint": "2686a2e82f4a788b780c63292f2058cae88d9ac6fa95f404ba87c3f44bcbb713",
-          "url": "github:NixOS/nixpkgs/94f88613cb335c6d52d4c87b4ee3275ead7092b5"
+          "fingerprint": "4a5ebeec1b11fae36f82c80ac07d4133d1ff259135a711c02938d1822c859863",
+          "url": "github:NixOS/nixpkgs/01885a071465e223f8f68971f864b15829988504"
         },
         "priority": 5
       }
@@ -186,11 +136,11 @@
     "inputs": {
       "nixpkgs": {
         "from": {
-          "lastModified": 1702761668,
-          "narHash": "sha256-pjaa+C9fUvUBh2ebGha6zQdb6mpBBFCJW4WwYfId9+k=",
+          "lastModified": 1707786466,
+          "narHash": "sha256-yLPfrmW87M2qt+8bAmwopJawa+MJLh3M9rUbXtpUc1o=",
           "owner": "NixOS",
           "repo": "nixpkgs",
-          "rev": "94f88613cb335c6d52d4c87b4ee3275ead7092b5",
+          "rev": "01885a071465e223f8f68971f864b15829988504",
           "type": "github"
         },
         "subtrees": [
